@@ -30,6 +30,14 @@ app.use("/maps", mapRouter);
 app.use("/ride", rideRouter);
 app.use("/images", express.static(path.join(__dirname, "public/images/uploads")));
 
+const fs = require("fs");
+
+const uploadPath = path.join(process.cwd(), "public/images/uploads");
+
+if (!fs.existsSync(uploadPath)) {
+  fs.mkdirSync(uploadPath, { recursive: true });
+}
+
 app.get("/", (req, res) => {
   res.send("Hello From NeuraGO Backend");
 });
